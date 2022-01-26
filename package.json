@@ -19,7 +19,7 @@
     "preview": "vite build && vite preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
     "test": "cypress run-ct",
-    "test:headed": "cypress open"
+    "test:headed": "cypress open-ct"
   },
   "dependencies": {
     "fuse.js": "^6.5.3"

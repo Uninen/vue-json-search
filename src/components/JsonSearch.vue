@@ -42,7 +42,7 @@ const tagRoot = props.tagRoot !== undefined ? props.tagRoot : '/tags/'
 function renderTag(tag: string, index: number, tags: string[]) {
   let result = ''
   if (tag.length > 0) {
-    result += '<a href="' + tagRoot + tag + '/" rel="tag">' + tag + '</a>'
+    result += '<a href="' + tagRoot + tag + '/" rel="tag" class="tag">' + tag + '</a>'
 
     if (index < tags.length - 1) {
       result += ', '
@@ -52,12 +52,15 @@ function renderTag(tag: string, index: number, tags: string[]) {
 }
 
 function initSearch() {
-  fetch(dataUrl)
-    .then((response) => response.json())
-    .then((searchIndex) => {
-      fuse = new Fuse(searchIndex, fuseOptions)
-      searchReady.value = true
-    })
+  return new Promise<void>((resolve, reject) => {
+    fetch(dataUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        fuse = new Fuse(data, fuseOptions)
+        resolve()
+      })
+      .catch((err) => reject(err))
+  })
 }
 
 watch(searchTerm, (value) => {
@@ -75,6 +78,13 @@ watch(searchTerm, (value) => {
 })
 
 initSearch()
+  .then(() => {
+    searchReady.value = true
+  })
+  .catch((err) => {
+    console.error(err)
+    searchReady.value = false
+  })
 </script>
 <template>
   <div v-if="searchReady" id="jsonsearch">
