@@ -19,9 +19,12 @@ The following instructions assume you have a `package.json` in your project.
     import JsonSearch from 'vue-json-search'
 
     createApp({
-    render: () => h(JsonSearch),
+    render: () => h(JsonSearch, { showTags: true }), // Props argument dict is optional
     }).mount('#searchapp')
     ```
+
+    The above shows a minimal functional way to use this component. It's just JavaScript, use it however works best for you. (The example has an advantage of not needing Vue templates, thus resulting in a smaller bundle size.)
+
 3. Add search component to your HTML template:
 
     ```html
@@ -55,7 +58,51 @@ The following instructions assume you have a `package.json` in your project.
 
     ```
 
+    The expected default JSON looks like this:
+
+    ```json
+    [
+        {
+            "contents": "Lorem ipsum ...",
+            "permalink": "https://example.com/",
+            "tags": [
+                "foo",
+                "bar"
+            ],
+            "title": "Lorem Ipsum"
+        },
+        ...
+    ]
+    ```
+
 The search Just Works. You can style it easily with plain CSS or for example with Tailwind CSS. Just make sure your markup doesn't look wonky for clients that have JavaScript ddisabled.
+
+## Using As Vue Component
+
+You can use this like any other Vue component.
+
+1. Import the component in your project
+
+    ```js
+    import JsonSearch from 'vue-json-search'
+    ```
+1. And then use it in your template as any other Vue component:
+
+    ```html
+    <JsonSearch :max-results="20" />
+    ```
+
+## Configuration
+
+The component takes configuration options as props. All options are optional.
+
+| Option | Default | Description |
+| --- | --- | --- |
+| url | `'/index.json'` | The URL for search corpus JSON. (See the required format above.) |
+| fuseOptions | [Default options](/blob/main/src/components/JsonSearch.vue#L13-L20) | Options for Fuse.js. See [Fuse docs](https://fusejs.io/api/options.html) for all options. |
+| maxResults | `10` | Maximum number of results to show in the result list. |
+| showTags | `false` | List tags with every search result item. |
+| tagRoot | `'/tags/'` | Root URL to link tags. Links are formatted as `rootUrl + tag + '/'`. |
 
 ## Default Markup
 
@@ -66,13 +113,14 @@ Here's the default markup you migth want to style yourself:
   <input id="jsonsearchinput" name="search" type="text" />
   <div class="results">
     <h3>N Results</h3>
-    <!-- List only shown if results -->
+    <!-- Shown only if results.length > 0 -->
     <ol>
-      <li>
-        <div class="result">
-          <div class="title">
-            <a>{{ result.item.title }}</a>
+        <li>
+            <div class="result">
+                <div class="title">
+                    <a>{{ result.item.title }}</a>
           </div>
+          <!-- Shown only if showTags === true -->
           <div class="tags">
               <span><a>{{ tag }}</a>, </span>
               <span><a>{{ LastTag }}</a></span>

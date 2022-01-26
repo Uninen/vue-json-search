@@ -1,6 +1,6 @@
 {
   "name": "vue-json-search",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
   "exports": {
@@ -19,7 +19,7 @@
     "preview": "vite build && vite preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
     "test": "cypress run-ct",
-    "test:headed": "cypress open"
+    "test:headed": "cypress open-ct"
   },
   "dependencies": {
     "fuse.js": "^6.5.3"
@@ -70,7 +70,7 @@
     "fuse"
   ],
   "bugs": {
-    "url": "https://gitlab.com/uninen/push-to-repo/-/issues"
+    "url": "https://gitlab.com/uninen/vue-json-search/-/issues"
   },
-  "homepage": "https://gitlab.com/uninen/push-to-repo"
+  "homepage": "https://gitlab.com/uninen/vue-json-search"
 }
