@@ -113,13 +113,14 @@ Here's the default markup you migth want to style yourself:
   <input id="jsonsearchinput" name="search" type="text" />
   <div class="results">
     <h3>N Results</h3>
-    <!-- List only shown if results -->
+    <!-- Shown only if results.length > 0 -->
     <ol>
-      <li>
-        <div class="result">
-          <div class="title">
-            <a>{{ result.item.title }}</a>
+        <li>
+            <div class="result">
+                <div class="title">
+                    <a>{{ result.item.title }}</a>
           </div>
+          <!-- Shown only if showTags === true -->
           <div class="tags">
               <span><a>{{ tag }}</a>, </span>
               <span><a>{{ LastTag }}</a></span>
