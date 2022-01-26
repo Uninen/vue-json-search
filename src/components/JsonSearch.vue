@@ -22,6 +22,7 @@ const searchReady = ref(false)
 const searchTerm = ref('')
 const resultsTitle = ref('')
 const results = ref<FuseResult<SearchResultItem>[]>([])
+const visibleResults = ref<FuseResult<SearchResultItem>[]>([])
 let fuse: Fuse<SearchResultItem>
 
 const props = defineProps<{
@@ -59,7 +60,8 @@ function initSearch() {
 
 watch(searchTerm, (value) => {
   if (value.length > 1) {
-    results.value = fuse.search(value).slice(0, maxResults)
+    results.value = fuse.search(value)
+    visibleResults.value = results.value.slice(0, maxResults)
     if (results.value.length === 1) {
       resultsTitle.value = '1 result'
     } else {
@@ -85,7 +87,7 @@ initSearch()
     <div v-if="searchTerm.length > 1" class="results">
       <h3>{{ resultsTitle }}</h3>
       <ol v-if="results.length > 0">
-        <li v-for="result in results" :key="result.refIndex">
+        <li v-for="result in visibleResults" :key="result.refIndex">
           <div class="result">
             <div class="title">
               <a :href="result.item.permalink">{{ result.item.title }}</a>

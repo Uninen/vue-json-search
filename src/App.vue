@@ -50,7 +50,7 @@
         <a href="/index.json">full corpus</a>).
       </p>
 
-      <JsonSearch />
+      <JsonSearch :max-results="3" />
     </div>
   </main>
   <footer class="container py-6 mx-auto text-sm text-center text-gray-700">
