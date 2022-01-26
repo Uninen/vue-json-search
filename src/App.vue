@@ -51,14 +51,6 @@
       </p>
 
       <JsonSearch />
-
-      <h2>Features</h2>
-
-      <ul>
-        <li>Easy to setup with any software that can output a JSON search corpus</li>
-        <li>Ships without styles, easy to style with Tailwind</li>
-        <li>Minimal dependencies (Fuse.js and Vue 3</li>
-      </ul>
     </div>
   </main>
   <footer class="container py-6 mx-auto text-sm text-center text-gray-700">

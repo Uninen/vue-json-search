@@ -2,6 +2,10 @@
 
 Simple search component based on [Fuse.js](https://github.com/krisk/Fuse). Designed for [Hugo](https://github.com/gohugoio/hugo) but works as well with any tool.
 
+- Easy to setup with any software that can output a JSON search corpus
+- Ships without styles, easy to style with Tailwind
+- Minimal dependencies (Fuse.js and Vue 3)
+
 ## Elsewhere
 
 - Read my continuously updating learnings from Vite / Vue / TypeScript and other Web development topics from my [Today I Learned site](https://til.unessa.net/)
