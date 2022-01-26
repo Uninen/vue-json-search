@@ -27,20 +27,22 @@ let fuse: Fuse<SearchResultItem>
 
 const props = defineProps<{
   url?: string
+  fuseOptions?: Fuse.IFuseOptions<unknown>
   maxResults?: number
   showTags?: boolean
-  fuseOptions?: Fuse.IFuseOptions<unknown>
+  tagRoot?: string
 }>()
 
 const dataUrl = props.url !== undefined ? props.url : '/index.json'
 const maxResults = props.maxResults !== undefined ? props.maxResults : 10
 const showTags = props.showTags !== undefined ? props.showTags : false
 const fuseOptions = props.fuseOptions !== undefined ? props.fuseOptions : defaultOptions
+const tagRoot = props.tagRoot !== undefined ? props.tagRoot : '/tags/'
 
 function renderTag(tag: string, index: number, tags: string[]) {
   let result = ''
   if (tag.length > 0) {
-    result += '<a href="/tags/' + tag + '/" rel="tag">' + tag + '</a>'
+    result += '<a href="' + tagRoot + tag + '/" rel="tag">' + tag + '</a>'
 
     if (index < tags.length - 1) {
       result += ', '
