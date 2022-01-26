@@ -22,7 +22,6 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'build',
     lib: {
       entry: 'src/search.ts',
       name: 'vue-json-search',
