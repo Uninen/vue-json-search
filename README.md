@@ -6,6 +6,8 @@ Simple search component based on [Fuse.js](https://github.com/krisk/Fuse). Desig
 - Ships without styles, easy to style with Tailwind
 - Minimal dependencies (Fuse.js and Vue 3)
 
+[Live demo available](https://til.unessa.net/) at til.unessa.net
+
 ## Elsewhere
 
 - Read my continuously updating learnings from Vite / Vue / TypeScript and other Web development topics from my [Today I Learned site](https://til.unessa.net/)
