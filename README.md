@@ -77,9 +77,24 @@ The following instructions assume you have a `package.json` in your project.
 
 The search Just Works. You can style it easily with plain CSS or for example with Tailwind CSS. Just make sure your markup doesn't look wonky for clients that have JavaScript ddisabled.
 
+## Using As Vue Component
+
+You can use this like any other Vue component.
+
+1. Import the component in your project
+
+    ```js
+    import JsonSearch from 'vue-json-search'
+    ```
+1. And then use it in your template as any other Vue component:
+
+    ```html
+    <JsonSearch :max-results="20" />
+    ```
+
 ## Configuration
 
-The component takes configuration options as props. All configuration options are optional.
+The component takes configuration options as props. All options are optional.
 
 | Option | Default | Description |
 | --- | --- | --- |
