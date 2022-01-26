@@ -1,6 +1,6 @@
 {
   "name": "vue-json-search",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
   "exports": {
@@ -70,7 +70,7 @@
     "fuse"
   ],
   "bugs": {
-    "url": "https://gitlab.com/uninen/push-to-repo/-/issues"
+    "url": "https://gitlab.com/uninen/vue-json-search/-/issues"
   },
-  "homepage": "https://gitlab.com/uninen/push-to-repo"
+  "homepage": "https://gitlab.com/uninen/vue-json-search"
 }
