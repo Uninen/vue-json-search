@@ -1,0 +1,94 @@
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import Fuse from 'fuse.js'
+
+type FuseResult<T> = Fuse.FuseResult<T>
+type SearchResultItem = {
+  title: string
+  permalink: string
+  summary: string
+  tags: string[]
+}
+
+const options: Fuse.IFuseOptions<SearchResultItem> = {
+  shouldSort: true,
+  location: 0,
+  distance: 100,
+  threshold: 0.4,
+  minMatchCharLength: 2,
+  keys: ['title', 'permalink', 'contents', 'tags'],
+}
+const searchReady = ref(false)
+const searchTerm = ref('')
+const resultsTitle = ref('')
+const results = ref<FuseResult<SearchResultItem>[]>([])
+const maxResults = 10
+const showTags = ref(true)
+const dataUrl = '/index.json'
+let fuse: Fuse<SearchResultItem>
+
+function renderTag(tag: string, index: number, tags: string[]) {
+  let result = ''
+  if (tag.length > 0) {
+    result += '<a href="/tags/' + tag + '/" rel="tag">' + tag + '</a>'
+
+    if (index < tags.length - 1) {
+      result += ', '
+    }
+  }
+  return result
+}
+
+function initSearch() {
+  fetch(dataUrl)
+    .then((response) => response.json())
+    .then((searchIndex) => {
+      fuse = new Fuse(searchIndex, options)
+      searchReady.value = true
+    })
+}
+
+watch(searchTerm, (value) => {
+  if (value.length > 1) {
+    results.value = fuse.search(value).slice(0, maxResults)
+    if (results.value.length === 1) {
+      resultsTitle.value = '1 result'
+    } else {
+      resultsTitle.value = results.value.length + ' results'
+    }
+  } else {
+    results.value = []
+  }
+})
+
+initSearch()
+</script>
+<template>
+  <div v-if="searchReady" id="jsonsearch">
+    <input
+      id="jsonsearchinput"
+      name="search"
+      type="text"
+      autocomplete="off"
+      placeholder="Search"
+      v-model="searchTerm"
+    />
+    <div v-if="searchTerm.length > 1" class="results">
+      <h3>{{ resultsTitle }}</h3>
+      <ol v-if="results.length > 0">
+        <li v-for="result in results" :key="result.refIndex">
+          <div class="result">
+            <div class="title">
+              <a :href="result.item.permalink">{{ result.item.title }}</a>
+            </div>
+            <div v-if="showTags" class="tags">
+              <template v-for="(tag, index) in result.item.tags" :key="tag">
+                <span v-html="renderTag(tag, index, result.item.tags)"></span>
+              </template>
+            </div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</template>

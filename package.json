@@ -1,0 +1,61 @@
+{
+  "name": "vue-json-search",
+  "version": "0.0.0",
+  "main": "dist/index.es.js",
+  "repository": "git@gitlab.com:uninen/vue-json-search.git",
+  "author": "Ville Säävuori <ville@unessa.net>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite build && vite preview",
+    "start": "yarn dev & wait-on tcp:3000 -v",
+    "test": "cypress run-ct",
+    "test:headed": "cypress open"
+  },
+  "dependencies": {
+    "fuse.js": "^6.5.3"
+  },
+  "devDependencies": {
+    "@cypress/vite-dev-server": "~2.2",
+    "@cypress/vue": "~3.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "@typescript-eslint/eslint-plugin": "~5",
+    "@typescript-eslint/parser": "~5",
+    "@vitejs/plugin-vue": "~2",
+    "@vue/eslint-config-standard": "~6.1",
+    "@vue/eslint-config-typescript": "~10",
+    "autoprefixer": "~10",
+    "cypress": "~9.3",
+    "eslint": "~8.7",
+    "eslint-config-prettier": "~8.3",
+    "eslint-plugin-import": "~2",
+    "eslint-plugin-node": "~11.1",
+    "eslint-plugin-promise": "~6.0",
+    "eslint-plugin-vue": "~8",
+    "postcss": "~8.4",
+    "postcss-import": "^14.0.2",
+    "postcss-nesting": "~10",
+    "tailwindcss": "~3",
+    "typescript": "~4.5",
+    "vite": "~2.7",
+    "vue": "~3.2",
+    "wait-on": "~6.0"
+  },
+  "files": [
+    "dist/index.es.js",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "keywords": [
+    "vue",
+    "json",
+    "search",
+    "hugo",
+    "fuse"
+  ],
+  "bugs": {
+    "url": "https://gitlab.com/uninen/push-to-repo/-/issues"
+  },
+  "homepage": "https://gitlab.com/uninen/push-to-repo"
+}
