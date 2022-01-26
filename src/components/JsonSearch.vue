@@ -10,7 +10,7 @@ type SearchResultItem = {
   tags: string[]
 }
 
-const options: Fuse.IFuseOptions<SearchResultItem> = {
+const defaultOptions: Fuse.IFuseOptions<SearchResultItem> = {
   shouldSort: true,
   location: 0,
   distance: 100,
@@ -22,10 +22,19 @@ const searchReady = ref(false)
 const searchTerm = ref('')
 const resultsTitle = ref('')
 const results = ref<FuseResult<SearchResultItem>[]>([])
-const maxResults = 10
-const showTags = ref(true)
-const dataUrl = '/index.json'
 let fuse: Fuse<SearchResultItem>
+
+const props = defineProps<{
+  url?: string
+  maxResults?: number
+  showTags?: boolean
+  fuseOptions?: Fuse.IFuseOptions<unknown>
+}>()
+
+const dataUrl = props.url !== undefined ? props.url : '/index.json'
+const maxResults = props.maxResults !== undefined ? props.maxResults : 10
+const showTags = props.showTags !== undefined ? props.showTags : false
+const fuseOptions = props.fuseOptions !== undefined ? props.fuseOptions : defaultOptions
 
 function renderTag(tag: string, index: number, tags: string[]) {
   let result = ''
@@ -43,7 +52,7 @@ function initSearch() {
   fetch(dataUrl)
     .then((response) => response.json())
     .then((searchIndex) => {
-      fuse = new Fuse(searchIndex, options)
+      fuse = new Fuse(searchIndex, fuseOptions)
       searchReady.value = true
     })
 }
