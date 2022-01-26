@@ -1,7 +1,15 @@
 {
   "name": "vue-json-search",
-  "version": "0.0.0",
+  "version": "0.0.6",
   "main": "dist/index.es.js",
+  "module": "dist/index.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
+    }
+  },
+  "typings": "./dist/src/search.d.ts",
   "repository": "git@gitlab.com:uninen/vue-json-search.git",
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
@@ -34,16 +42,23 @@
     "eslint-plugin-promise": "~6.0",
     "eslint-plugin-vue": "~8",
     "postcss": "~8.4",
-    "postcss-import": "^14.0.2",
+    "postcss-import": "~14.0",
     "postcss-nesting": "~10",
     "tailwindcss": "~3",
     "typescript": "~4.5",
     "vite": "~2.7",
+    "vite-plugin-dts": "~0.9",
     "vue": "~3.2",
     "wait-on": "~6.0"
   },
   "files": [
     "dist/index.es.js",
+    "dist/index.es.js.map",
+    "dist/index.umd.js",
+    "dist/index.umd.js.map",
+    "dist/src/env.d.ts",
+    "dist/src/search.d.ts",
+    "dist/src/components/JsonSearch.vue.d.ts",
     "README.md",
     "LICENSE.md"
   ],

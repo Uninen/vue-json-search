@@ -2,6 +2,7 @@ import * as path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import pkg from './package.json'
+import dts from 'vite-plugin-dts'
 
 process.env.VITE_APP_VERSION = pkg.version
 if (process.env.NODE_ENV === 'production') {
@@ -15,6 +16,12 @@ export default defineConfig({
         refSugar: true,
       },
     }),
+    dts({
+      staticImport: true,
+      copyDtsFiles: false,
+      // skipDiagnostics: false,
+      // logDiagnostics: true,
+    }),
   ],
   resolve: {
     alias: {
@@ -22,11 +29,12 @@ export default defineConfig({
     },
   },
   build: {
+    emptyOutDir: true,
+    sourcemap: true,
     lib: {
       entry: 'src/search.ts',
       name: 'vue-json-search',
-      formats: ['es'],
-      fileName: 'index',
+      fileName: (format) => `index.${format}.js`,
     },
     rollupOptions: {
       external: ['vue'],
