@@ -35,51 +35,11 @@ The following instructions assume you have a `package.json` in your project.
     ```
 
 2. Make `/index.json` available (see expected JSON format and configuration options below)
+3. Add your styles and you're done. (See the default markup below.)
 
 ### Setting Up With Hugo Pipelines
 
-1. Include the search script above the `</body>`-tag of your template (example for Hugo Pipelines):
-
-    ```html
-    {{ $builtjs := resources.Get "js/search.js" | js.Build }}
-    <script type="text/javascript" src="{{ $builtjs.RelPermalink }}" defer></script>
-    ```
-1. Make sure you have a JSON search corpus available at `/index.json` (example for Hugo):
-    ```toml
-    # config.toml
-    [outputs]
-        home = ["HTML", "RSS", "JSON"]
-    ```
-
-    Then in `themes/[your-theme]/layouts/_default/index.json`:
-
-    ```
-    {{- $.Scratch.Add "index" slice -}}
-    {{- range .Site.RegularPages -}}
-        {{- $.Scratch.Add "index" (dict "title" .Title "tags" .Params.tags "contents" .Plain "permalink" .Permalink) -}}
-    {{- end -}}
-    {{- $.Scratch.Get "index" | jsonify -}}
-
-    ```
-
-    The expected default JSON looks like this:
-
-    ```json
-    [
-        {
-            "contents": "Lorem ipsum ...",
-            "permalink": "https://example.com/",
-            "tags": [
-                "foo",
-                "bar"
-            ],
-            "title": "Lorem Ipsum"
-        },
-        ...
-    ]
-    ```
-
-The search Just Works. You can style it easily with plain CSS or for example with Tailwind CSS. Just make sure your markup doesn't look wonky for clients that have JavaScript ddisabled.
+Setting this up with Hugo can be done in less than 5 minutes. [Read this blog post](https://til.unessa.net/hugo/adding-simple-search/) for step by step instructions.
 
 ## Using As Vue Component
 
@@ -171,6 +131,48 @@ Here's the default markup you migth want to style yourself:
   </div>
 </div>
 ```
+
+## Styling With Tailwind
+
+The default markup is super easity to style. The component's don't ship with any CSS but if you want to have an easy template to copy from, here's an Tailwind example:
+
+```css
+/* Tailwind PostCSS Example  - live at https://til.unessa.net */
+.jsonsearch {
+  @apply mt-6 w-full;
+}
+
+.jsonsearch label {
+  @apply sr-only;
+}
+
+.jsonsearch .jsonsearchinput {
+  @apply flex bg-gray-800 px-2 py-1 text-gray-100 placeholder:text-gray-500 mx-auto w-5/6 md:w-1/2 md:mx-0;
+}
+
+.jsonsearch .searchresults h3 {
+ @apply my-4 text-lg font-semibold;
+}
+
+.jsonsearch .searchresults ol {
+ @apply space-y-4;
+}
+
+.jsonsearch .searchresults .title a {
+ @apply inline-block text-lg leading-none text-indigo-400 align-top hover:underline;
+}
+
+.jsonsearch .result .tags {
+ @apply block text-gray-400 text-xs;
+}
+
+.jsonsearch .result .tags a {
+ @apply leading-tight text-gray-400 text-opacity-80 hover:text-gray-200;
+}
+```
+
+You **don't need Tailwind** or any other tool, just use plain CSS or whatever tool works best for you.
+
 ## Future Ideas
 
 - Ship Web Component version for users who don't want to set up JS build tooling
