@@ -1,3 +1,30 @@
+<script setup lang="ts">
+import JsonSearch from '@/components/JsonSearch.vue'
+import SearchInput from '@/components/SearchInput.vue'
+import SearchResults from '@/components/SearchResults.vue'
+import ResultTitle from '@/components/ResultTitle.vue'
+import ResultListItem from '@/components/ResultListItem.vue'
+
+const VERSION = import.meta.env.VITE_APP_VERSION
+const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
+  ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
+  : undefined
+const thisYear = new Date().getFullYear()
+</script>
+<style lang="postcss">
+label {
+  @apply sr-only;
+}
+
+input {
+  @apply border;
+}
+
+.tags {
+  @apply text-sm;
+}
+</style>
+
 <template>
   <header class="container mx-auto mt-6 prose-sm md:prose">
     <h1>Vue JSON Search v{{ VERSION }}</h1>
@@ -50,7 +77,23 @@
         <a href="/index.json">full corpus</a>).
       </p>
 
+      <h3>Default</h3>
       <JsonSearch :max-results="5" />
+
+      <h3>Custom</h3>
+      <JsonSearch :show-tags="true" id="secondsearch" v-slot="{ results }">
+        <SearchInput />
+        <SearchResults>
+          <ResultTitle />
+
+          <div v-for="res in results" :key="res.refIndex">
+            <ResultListItem v-slot="{ result }" :result="res.item">
+              <p>Title: {{ result.title }}</p>
+              <p>Tags: {{ result.tags }}</p>
+            </ResultListItem>
+          </div>
+        </SearchResults>
+      </JsonSearch>
     </div>
   </main>
   <footer class="container py-6 mx-auto text-sm text-center text-gray-700">
@@ -62,25 +105,3 @@
     </p>
   </footer>
 </template>
-<script setup lang="ts">
-import JsonSearch from '@/components/JsonSearch.vue'
-
-const VERSION = import.meta.env.VITE_APP_VERSION
-const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
-  ? new Date(Number(import.meta.env.VITE_APP_BUILD_EPOCH))
-  : undefined
-const thisYear = new Date().getFullYear()
-</script>
-<style lang="postcss">
-label {
-  @apply sr-only;
-}
-
-input {
-  @apply border;
-}
-
-.tags {
-  @apply text-sm;
-}
-</style>

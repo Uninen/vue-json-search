@@ -1,12 +1,11 @@
 <script setup lang="ts">
+import { inject, Ref } from 'vue'
 const props = defineProps<{
-  modelValue?: string
   label?: string
 }>()
 
 const label = props.label !== undefined ? props.label : 'Search'
-
-defineEmits(['update:modelValue'])
+const searchTerm = inject<Ref<string>>('searchTerm')
 </script>
 <script lang="ts">
 export default {
@@ -14,7 +13,11 @@ export default {
 }
 </script>
 <template>
-  <slot>
+  <slot
+    v-bind="{
+      searchTerm,
+    }"
+  >
     <label for="jsonsearchinput">
       {{ label }}
     </label>
@@ -25,8 +28,7 @@ export default {
       autocomplete="off"
       placeholder="Search"
       type="text"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      v-model="searchTerm"
     />
   </slot>
 </template>
