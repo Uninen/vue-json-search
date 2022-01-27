@@ -1,4 +1,4 @@
-# Vue JSON Search
+# Headless Vue JSON Search
 
 Headless Vue (3.x) search component based on [Fuse.js](https://github.com/krisk/Fuse). Designed for static generators like [Hugo](https://github.com/gohugoio/hugo) but works with any site that's cabable of producing a JSON corpus.
 
@@ -173,9 +173,9 @@ Here's the default markup you migth want to style yourself:
 ```
 ## Future Ideas
 
-- Allow full control of markup by making the component headless
 - Ship Web Component version for users who don't want to set up JS build tooling
 - Separate search machinery from Fuse to allow other backends
+- Done! ~~Allow full control of markup by making the component headless~~
 
 ## Sites Using This
 
