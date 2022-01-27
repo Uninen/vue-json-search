@@ -1,13 +1,13 @@
 # Vue JSON Search
 
-Simple Vue (3.x) search component for static sites based on [Fuse.js](https://github.com/krisk/Fuse). Designed for [Hugo](https://github.com/gohugoio/hugo) but works with any site that's cabable of producing a JSON corpus.
+Headless Vue (3.x) search component based on [Fuse.js](https://github.com/krisk/Fuse). Designed for static generators like [Hugo](https://github.com/gohugoio/hugo) but works with any site that's cabable of producing a JSON corpus.
 
 - **Easy to setup** with any software
-- Ships without styles, **easy to style** with Tailwind CSS or plain CSS
+- **100% control of the markup and styles** using headless Vue components and slots
 - Lightweight and **minimal dependencies** (Fuse.js and Vue 3), **~8 Kb zipped**
 
 A [live demo](https://til.unessa.net/) is available.
-## Usage
+## Simple Usage
 
 The following instructions assume you have a `package.json` in your project.
 
@@ -91,6 +91,35 @@ You can use this like any other Vue component.
     ```html
     <JsonSearch :max-results="20" />
     ```
+
+## Customizing Markup
+
+You can customize 100% of the markup using Vue slots.
+
+First import the components you need:
+
+```js
+import { JsonSearch, ResultList, ResultListItem, ResultTitle, SearchInput, SearchResults } from 'vue-json-search'
+```
+
+Then do whatever you want with them. Here's a simple example:
+
+```html
+<JsonSearch :show-tags="true" v-slot="{ results }">
+  <SearchInput />
+  <SearchResults>
+    <ResultTitle />
+    <div v-for="res in results" :key="res.refIndex">
+      <ResultListItem v-slot="{ result }" :result="res.item">
+        <p>Title: {{ result.title }}</p>
+        <p>Tags: {{ result.tags }}</p>
+      </ResultListItem>
+    </div>
+  </SearchResults>
+</JsonSearch>
+```
+
+The documentation for the components is not great but the source is easy to read and understand if you are familiar with Vue.
 
 ## Configuration
 
