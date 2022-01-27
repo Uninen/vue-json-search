@@ -1,31 +1,31 @@
-# Vue JSON Search
+# Headless Vue JSON Search
 
-Simple Vue (3.x) search component for static sites based on [Fuse.js](https://github.com/krisk/Fuse). Designed for [Hugo](https://github.com/gohugoio/hugo) but works with any site that's cabable of producing a JSON corpus.
+Headless Vue (3.x) search component based on [Fuse.js](https://github.com/krisk/Fuse). Designed for static generators like [Hugo](https://github.com/gohugoio/hugo) but works with any site that's cabable of producing a JSON corpus.
 
 - **Easy to setup** with any software
-- Ships without styles, **easy to style** with Tailwind CSS or plain CSS
+- **100% control of the markup and styles** using headless Vue components and slots
 - Lightweight and **minimal dependencies** (Fuse.js and Vue 3), **~8 Kb zipped**
 
 A [live demo](https://til.unessa.net/) is available.
-## Usage
+## Simple Usage With Static Site
 
 The following instructions assume you have a `package.json` in your project.
 
 1. Install `vue@next` and `vue-json-search`
-2. Create a simple `search.js` script for your site:
+1. Create a simple `search.js` script for your site:
 
     ```js
     import { createApp, h } from 'vue'
-    import JsonSearch from 'vue-json-search'
+    import { JsonSearch } from 'vue-json-search'
 
     createApp({
-    render: () => h(JsonSearch, { showTags: true }), // Props argument dict is optional
+      render: () => h(JsonSearch, { showTags: true }), // Props argument dict is optional
     }).mount('#searchapp')
     ```
 
     The above shows a minimal functional way to use this component. It's just JavaScript, use it however works best for you. (The example has an advantage of not needing Vue templates, thus resulting in a smaller bundle size.)
 
-3. Add search component to your HTML template:
+1. Add search component to your HTML template:
 
     ```html
     <div>
@@ -34,13 +34,17 @@ The following instructions assume you have a `package.json` in your project.
     </div>
     ```
 
-4. Include the search script above the `</body>`-tag of your template (example for Hugo Pipelines):
+2. Make `/index.json` available (see expected JSON format and configuration options below)
+
+### Setting Up With Hugo Pipelines
+
+1. Include the search script above the `</body>`-tag of your template (example for Hugo Pipelines):
 
     ```html
     {{ $builtjs := resources.Get "js/search.js" | js.Build }}
     <script type="text/javascript" src="{{ $builtjs.RelPermalink }}" defer></script>
     ```
-5. Make sure you have a JSON search corpus available at `/index.json` (example for Hugo):
+1. Make sure you have a JSON search corpus available at `/index.json` (example for Hugo):
     ```toml
     # config.toml
     [outputs]
@@ -84,13 +88,42 @@ You can use this like any other Vue component.
 1. Import the component in your project
 
     ```js
-    import JsonSearch from 'vue-json-search'
+    import { JsonSearch } from 'vue-json-search'
     ```
 1. And then use it in your template as any other Vue component:
 
     ```html
     <JsonSearch :max-results="20" />
     ```
+
+## Customizing Markup
+
+You can customize 100% of the markup using Vue slots.
+
+First import the components you need:
+
+```js
+import { JsonSearch, ResultList, ResultListItem, ResultTitle, SearchInput, SearchResults } from 'vue-json-search'
+```
+
+Then do whatever you want with them. Here's a simple example:
+
+```html
+<JsonSearch :show-tags="true" v-slot="{ results }">
+  <SearchInput />
+  <SearchResults>
+    <ResultTitle />
+    <div v-for="res in results" :key="res.refIndex">
+      <ResultListItem v-slot="{ result }" :result="res.item">
+        <p>Title: {{ result.title }}</p>
+        <p>Tags: {{ result.tags }}</p>
+      </ResultListItem>
+    </div>
+  </SearchResults>
+</JsonSearch>
+```
+
+The documentation for the components is not great but the source is easy to read and understand if you are familiar with Vue.
 
 ## Configuration
 
@@ -109,33 +142,40 @@ The component takes configuration options as props. All options are optional.
 Here's the default markup you migth want to style yourself:
 
 ```html
-<div id="jsonsearch">
-  <input id="jsonsearchinput" name="search" type="text" />
-  <div class="results">
-    <h3>N Results</h3>
+<div id="searchapp" data-v-app="">
+  <div class="jsonsearch">
+    <label for="jsonsearchinput">Search</label
+    ><input
+      name="jsonsearchinput"
+      class="jsonsearchinput"
+      autocomplete="off"
+      placeholder="Search"
+      type="text"
+    />
     <!-- Shown only if results.length > 0 -->
-    <ol>
-        <li>
-            <div class="result">
-                <div class="title">
-                    <a>{{ result.item.title }}</a>
+    <div class="searchresults">
+      <h3>N results</h3>
+      <ol>
+        <div class="result">
+          <div class="title">
+            <a>Result title</a>
           </div>
           <!-- Shown only if showTags === true -->
           <div class="tags">
-              <span><a>{{ tag }}</a>, </span>
-              <span><a>{{ LastTag }}</a></span>
+            <span><a rel="tag" class="tag">tag</a>, </span>
+            ><span><a rel="tag" class="tag">last tag</a></span>
           </div>
         </div>
-      </li>
-    </ol>
+      </ol>
+    </div>
   </div>
 </div>
 ```
 ## Future Ideas
 
-- Allow full control of markup by making the component headless
 - Ship Web Component version for users who don't want to set up JS build tooling
 - Separate search machinery from Fuse to allow other backends
+- Done! ~~Allow full control of markup by making the component headless~~
 
 ## Sites Using This
 

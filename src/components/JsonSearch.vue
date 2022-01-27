@@ -1,14 +1,9 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, provide } from 'vue'
 import Fuse from 'fuse.js'
-
-type FuseResult<T> = Fuse.FuseResult<T>
-type SearchResultItem = {
-  title: string
-  permalink: string
-  summary: string
-  tags: string[]
-}
+import SearchInput from './SearchInput.vue'
+import SearchResults from './SearchResults.vue'
+import { FuseResult, SearchResultItem } from '@/types'
 
 const defaultOptions: Fuse.IFuseOptions<SearchResultItem> = {
   shouldSort: true,
@@ -21,6 +16,7 @@ const defaultOptions: Fuse.IFuseOptions<SearchResultItem> = {
 const searchReady = ref(false)
 const searchTerm = ref('')
 const resultsTitle = ref('')
+const numResults = ref(0)
 const results = ref<FuseResult<SearchResultItem>[]>([])
 const visibleResults = ref<FuseResult<SearchResultItem>[]>([])
 let fuse: Fuse<SearchResultItem>
@@ -35,21 +31,7 @@ const props = defineProps<{
 
 const dataUrl = props.url !== undefined ? props.url : '/index.json'
 const maxResults = props.maxResults !== undefined ? props.maxResults : 10
-const showTags = props.showTags !== undefined ? props.showTags : false
 const fuseOptions = props.fuseOptions !== undefined ? props.fuseOptions : defaultOptions
-const tagRoot = props.tagRoot !== undefined ? props.tagRoot : '/tags/'
-
-function renderTag(tag: string, index: number, tags: string[]) {
-  let result = ''
-  if (tag.length > 0) {
-    result += '<a href="' + tagRoot + tag + '/" rel="tag" class="tag">' + tag + '</a>'
-
-    if (index < tags.length - 1) {
-      result += ', '
-    }
-  }
-  return result
-}
 
 function initSearch() {
   return new Promise<void>((resolve, reject) => {
@@ -67,6 +49,7 @@ watch(searchTerm, (value) => {
   if (value.length > 1) {
     results.value = fuse.search(value)
     visibleResults.value = results.value.slice(0, maxResults)
+    numResults.value = results.value.length
     if (results.value.length === 1) {
       resultsTitle.value = '1 result'
     } else {
@@ -74,8 +57,17 @@ watch(searchTerm, (value) => {
     }
   } else {
     results.value = []
+    visibleResults.value = []
+    numResults.value = 0
   }
 })
+
+provide('searchTerm', searchTerm)
+provide('showTags', props.showTags !== undefined ? props.showTags : false)
+provide('tagRoot', props.tagRoot !== undefined ? props.tagRoot : '/tags/')
+provide('numResults', numResults)
+provide('results', visibleResults)
+provide('resultsTitle', resultsTitle)
 
 initSearch()
   .then(() => {
@@ -86,32 +78,21 @@ initSearch()
     searchReady.value = false
   })
 </script>
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
 <template>
-  <div v-if="searchReady" id="jsonsearch">
-    <input
-      id="jsonsearchinput"
-      name="search"
-      type="text"
-      autocomplete="off"
-      placeholder="Search"
-      v-model="searchTerm"
-    />
-    <div v-if="searchTerm.length > 1" class="results">
-      <h3>{{ resultsTitle }}</h3>
-      <ol v-if="results.length > 0">
-        <li v-for="result in visibleResults" :key="result.refIndex">
-          <div class="result">
-            <div class="title">
-              <a :href="result.item.permalink">{{ result.item.title }}</a>
-            </div>
-            <div v-if="showTags" class="tags">
-              <template v-for="(tag, index) in result.item.tags" :key="tag">
-                <span v-html="renderTag(tag, index, result.item.tags)"></span>
-              </template>
-            </div>
-          </div>
-        </li>
-      </ol>
+  <slot
+    v-bind="{
+      searchTerm,
+      results: visibleResults,
+    }"
+  >
+    <div v-if="searchReady" class="jsonsearch" v-bind="$attrs">
+      <SearchInput />
+      <SearchResults />
     </div>
-  </div>
+  </slot>
 </template>
