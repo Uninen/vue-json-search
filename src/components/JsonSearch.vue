@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import Fuse from 'fuse.js'
+import SearchInput from './SearchInput.vue'
 
 type FuseResult<T> = Fuse.FuseResult<T>
 type SearchResultItem = {
@@ -87,15 +88,8 @@ initSearch()
   })
 </script>
 <template>
-  <div v-if="searchReady" id="jsonsearch">
-    <input
-      id="jsonsearchinput"
-      name="search"
-      type="text"
-      autocomplete="off"
-      placeholder="Search"
-      v-model="searchTerm"
-    />
+  <div v-if="searchReady" class="jsonsearch">
+    <SearchInput v-model="searchTerm" />
     <div v-if="searchTerm.length > 1" class="results">
       <h3>{{ resultsTitle }}</h3>
       <ol v-if="results.length > 0">

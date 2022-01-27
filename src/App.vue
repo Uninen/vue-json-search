@@ -46,11 +46,11 @@
       <h2>Demo</h2>
 
       <p>
-        Try searching Web / Vue / Python / Django related things (see
+        Try searching Web / Vue / Python / Django related things (see the
         <a href="/index.json">full corpus</a>).
       </p>
 
-      <JsonSearch :max-results="3" />
+      <JsonSearch :max-results="5" />
     </div>
   </main>
   <footer class="container py-6 mx-auto text-sm text-center text-gray-700">
@@ -72,6 +72,10 @@ const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
 const thisYear = new Date().getFullYear()
 </script>
 <style lang="postcss">
+label {
+  @apply sr-only;
+}
+
 input {
   @apply border;
 }
