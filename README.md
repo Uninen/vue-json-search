@@ -16,10 +16,10 @@ The following instructions assume you have a `package.json` in your project.
 
     ```js
     import { createApp, h } from 'vue'
-    import JsonSearch from 'vue-json-search'
+    import { JsonSearch } from 'vue-json-search'
 
     createApp({
-    render: () => h(JsonSearch, { showTags: true }), // Props argument dict is optional
+      render: () => h(JsonSearch, { showTags: true }), // Props argument dict is optional
     }).mount('#searchapp')
     ```
 
@@ -84,7 +84,7 @@ You can use this like any other Vue component.
 1. Import the component in your project
 
     ```js
-    import JsonSearch from 'vue-json-search'
+    import { JsonSearch } from 'vue-json-search'
     ```
 1. And then use it in your template as any other Vue component:
 
@@ -109,25 +109,32 @@ The component takes configuration options as props. All options are optional.
 Here's the default markup you migth want to style yourself:
 
 ```html
-<div id="jsonsearch">
-  <input id="jsonsearchinput" name="search" type="text" />
-  <div class="results">
-    <h3>N Results</h3>
+<div id="searchapp" data-v-app="">
+  <div class="jsonsearch">
+    <label for="jsonsearchinput">Search</label
+    ><input
+      name="jsonsearchinput"
+      class="jsonsearchinput"
+      autocomplete="off"
+      placeholder="Search"
+      type="text"
+    />
     <!-- Shown only if results.length > 0 -->
-    <ol>
-        <li>
-            <div class="result">
-                <div class="title">
-                    <a>{{ result.item.title }}</a>
+    <div class="searchresults">
+      <h3>N results</h3>
+      <ol>
+        <div class="result">
+          <div class="title">
+            <a>Result title</a>
           </div>
           <!-- Shown only if showTags === true -->
           <div class="tags">
-              <span><a>{{ tag }}</a>, </span>
-              <span><a>{{ LastTag }}</a></span>
+            <span><a rel="tag" class="tag">tag</a>, </span>
+            ><span><a rel="tag" class="tag">last tag</a></span>
           </div>
         </div>
-      </li>
-    </ol>
+      </ol>
+    </div>
   </div>
 </div>
 ```

@@ -1,6 +1,6 @@
 {
   "name": "vue-json-search",
-  "version": "0.1.0",
+  "version": "0.2.0-alpha.2",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
   "exports": {
@@ -14,9 +14,10 @@
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --config vite.site.config.ts",
+    "sitebuild": "vite --config vite.site.config.ts build",
     "build": "vite build",
-    "preview": "vite build && vite preview",
+    "preview": "vite --config vite.site.config.ts build && vite --config vite.site.config.ts preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
     "test": "cypress run-ct",
     "test:headed": "cypress open-ct"
@@ -57,8 +58,15 @@
     "dist/index.umd.js",
     "dist/index.umd.js.map",
     "dist/src/env.d.ts",
+    "dist/src/types.d.ts",
+    "dist/src/utils.d.ts",
     "dist/src/search.d.ts",
     "dist/src/components/JsonSearch.vue.d.ts",
+    "dist/src/components/ResultList.vue.d.ts",
+    "dist/src/components/ResultListItem.vue.d.ts",
+    "dist/src/components/ResultTitle.vue.d.ts",
+    "dist/src/components/SearchInput.vue.d.ts",
+    "dist/src/components/SearchResults.vue.d.ts",
     "README.md",
     "LICENSE.md"
   ],
