@@ -7,12 +7,12 @@ Headless Vue (3.x) search component based on [Fuse.js](https://github.com/krisk/
 - Lightweight and **minimal dependencies** (Fuse.js and Vue 3), **~8 Kb zipped**
 
 A [live demo](https://til.unessa.net/) is available.
-## Simple Usage
+## Simple Usage With Static Site
 
 The following instructions assume you have a `package.json` in your project.
 
 1. Install `vue@next` and `vue-json-search`
-2. Create a simple `search.js` script for your site:
+1. Create a simple `search.js` script for your site:
 
     ```js
     import { createApp, h } from 'vue'
@@ -25,7 +25,7 @@ The following instructions assume you have a `package.json` in your project.
 
     The above shows a minimal functional way to use this component. It's just JavaScript, use it however works best for you. (The example has an advantage of not needing Vue templates, thus resulting in a smaller bundle size.)
 
-3. Add search component to your HTML template:
+1. Add search component to your HTML template:
 
     ```html
     <div>
@@ -34,13 +34,17 @@ The following instructions assume you have a `package.json` in your project.
     </div>
     ```
 
-4. Include the search script above the `</body>`-tag of your template (example for Hugo Pipelines):
+2. Make `/index.json` available (see expected JSON format and configuration options below)
+
+### Setting Up With Hugo Pipelines
+
+1. Include the search script above the `</body>`-tag of your template (example for Hugo Pipelines):
 
     ```html
     {{ $builtjs := resources.Get "js/search.js" | js.Build }}
     <script type="text/javascript" src="{{ $builtjs.RelPermalink }}" defer></script>
     ```
-5. Make sure you have a JSON search corpus available at `/index.json` (example for Hugo):
+1. Make sure you have a JSON search corpus available at `/index.json` (example for Hugo):
     ```toml
     # config.toml
     [outputs]
