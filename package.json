@@ -1,6 +1,6 @@
 {
   "name": "vue-json-search",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/index.es.js",
   "module": "dist/index.es.js",
   "exports": {
@@ -10,7 +10,7 @@
     }
   },
   "typings": "./dist/src/search.d.ts",
-  "repository": "git@gitlab.com:uninen/vue-json-search.git",
+  "repository": "https://github.com/Uninen/vue-json-search",
   "author": "Ville Säävuori <ville@unessa.net>",
   "license": "MIT",
   "scripts": {
@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "@cypress/vite-dev-server": "~2.2",
-    "@cypress/vue": "~3.0",
+    "@cypress/vue": "~3.1",
     "@tailwindcss/typography": "^0.5.0",
     "@typescript-eslint/eslint-plugin": "~5",
     "@typescript-eslint/parser": "~5",
@@ -35,9 +35,9 @@
     "@vue/eslint-config-standard": "~6.1",
     "@vue/eslint-config-typescript": "~10",
     "autoprefixer": "~10",
-    "cypress": "~9.3",
-    "eslint": "~8.7",
-    "eslint-config-prettier": "~8.3",
+    "cypress": "~9.5",
+    "eslint": "~8.10",
+    "eslint-config-prettier": "~8.4",
     "eslint-plugin-import": "~2",
     "eslint-plugin-node": "~11.1",
     "eslint-plugin-promise": "~6.0",
@@ -47,7 +47,7 @@
     "postcss-nesting": "~10",
     "tailwindcss": "~3",
     "typescript": "~4.5",
-    "vite": "~2.7",
+    "vite": "~2.8",
     "vite-plugin-dts": "~0.9",
     "vue": "~3.2",
     "wait-on": "~6.0"
@@ -78,7 +78,7 @@
     "fuse"
   ],
   "bugs": {
-    "url": "https://gitlab.com/uninen/vue-json-search/-/issues"
+    "url": "https://github.com/Uninen/vue-json-search/issues"
   },
-  "homepage": "https://gitlab.com/uninen/vue-json-search"
+  "homepage": "https://github.com/Uninen/vue-json-search"
 }
