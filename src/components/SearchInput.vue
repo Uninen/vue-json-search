@@ -23,12 +23,12 @@ export default {
     </label>
     <input
       v-bind="$attrs"
+      v-model="searchTerm"
       name="jsonsearchinput"
       class="jsonsearchinput"
       autocomplete="off"
       placeholder="Search"
       type="text"
-      v-model="searchTerm"
     />
   </slot>
 </template>

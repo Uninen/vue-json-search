@@ -20,6 +20,7 @@
     "preview": "vite --config vite.site.config.ts build && vite --config vite.site.config.ts preview",
     "start": "yarn dev & wait-on tcp:3000 -v",
     "test": "cypress run-ct",
+    "test-ct": "playwright test -c playwright-ct.config.ts",
     "test:headed": "cypress open-ct"
   },
   "dependencies": {
@@ -28,11 +29,14 @@
   "devDependencies": {
     "@cypress/vite-dev-server": "^2.2",
     "@cypress/vue": "^3.1",
+    "@playwright/experimental-ct-vue": "^1.23.1",
+    "@playwright/test": "^1.23.1",
     "@tailwindcss/typography": "^0.5",
     "@typescript-eslint/eslint-plugin": "^5",
     "@typescript-eslint/parser": "^5",
     "@vitejs/plugin-vue": "^2",
     "@vue/eslint-config-typescript": "^10",
+    "@vue/test-utils": "^2.0.0",
     "autoprefixer": "^10",
     "cypress": "^9.5",
     "eslint": "^8.10",

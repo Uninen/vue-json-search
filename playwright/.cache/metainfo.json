@@ -1,0 +1,66 @@
+{
+  "version": 4,
+  "registerSourceHash": "b050670ce94c31d3c80a73a1b8c4773abcba1f5d",
+  "components": [
+    {
+      "fullName": "_Users_uninen_Code_Libraries_vue_json_search_src_components_JsonSearch_vue",
+      "importPath": "/Users/uninen/Code/Libraries/vue-json-search/src/components/JsonSearch.vue",
+      "isModuleOrAlias": false
+    }
+  ],
+  "tests": {
+    "/Users/uninen/Code/Libraries/vue-json-search/tests/component/JsonSearch.spec.ts": {
+      "timestamp": 1656755692641.6013,
+      "components": [
+        "_Users_uninen_Code_Libraries_vue_json_search_src_components_JsonSearch_vue"
+      ]
+    }
+  },
+  "sources": {
+    "/Users/uninen/Code/Libraries/vue-json-search/playwright/index.html": {
+      "timestamp": 1656753367080.2024
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/playwright/index.js": {
+      "timestamp": 1656753437865.6553
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/vue@3.2.37/node_modules/vue/dist/vue.runtime.esm-bundler.js": {
+      "timestamp": 1649517572713.151
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/@vue+runtime-dom@3.2.37/node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js": {
+      "timestamp": 1653920703751.8555
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/JsonSearch.vue": {
+      "timestamp": 1656754778060.1768
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/@vue+shared@3.2.37/node_modules/@vue/shared/dist/shared.esm-bundler.js": {
+      "timestamp": 1653920703681.0994
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/@vue+runtime-core@3.2.37/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js": {
+      "timestamp": 1655374381029.481
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/SearchResults.vue": {
+      "timestamp": 1656753876577.619
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/SearchInput.vue": {
+      "timestamp": 1656753835476.2747
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/fuse.js@6.6.2/node_modules/fuse.js/dist/fuse.esm.js": {
+      "timestamp": 1656752495785.1863
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/node_modules/.pnpm/@vue+reactivity@3.2.37/node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js": {
+      "timestamp": 1653920707990.7185
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/ResultTitle.vue": {
+      "timestamp": 1643301473758.2764
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/ResultList.vue": {
+      "timestamp": 1643301473758.059
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/components/ResultListItem.vue": {
+      "timestamp": 1643301473758.1636
+    },
+    "/Users/uninen/Code/Libraries/vue-json-search/src/utils.ts": {
+      "timestamp": 1643301473759.046
+    }
+  }
+}
