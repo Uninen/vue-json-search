@@ -1,21 +1,17 @@
 import { type PlaywrightTestConfig, devices } from '@playwright/experimental-ct-vue'
 
-import { resolve } from 'path'
-import vue from '@vitejs/plugin-vue'
-
 const config: PlaywrightTestConfig = {
-  testDir: './tests/component',
+  testDir: './tests/e2e',
+  webServer: {
+    command: 'pnpm dev',
+    url: 'http://localhost:3000/',
+    timeout: 120 * 1000,
+    reuseExistingServer: !process.env.CI,
+  },
   use: {
-    headless: false,
+    // headless: false,
+    baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
-    ctViteConfig: {
-      plugins: [vue()],
-      resolve: {
-        alias: {
-          '@': resolve(__dirname, './src'),
-        },
-      },
-    },
   },
   // projects: [
   //   {

@@ -64,12 +64,12 @@ const thisYear = new Date().getFullYear()
         <a href="/index.json">full corpus</a>).
       </p>
 
-      <h3>Default</h3>
-      <JsonSearch :max-results="5" />
+      <h3 data-test-id="default">Default</h3>
+      <JsonSearch data-test-id="defaultsearch" :max-results="5" />
 
       <h3>Custom</h3>
       <JsonSearch id="secondsearch" v-slot="{ results }" :show-tags="true">
-        <SearchInput />
+        <SearchInput data-test-id="customsearch" class="secondinput" />
         <SearchResults>
           <ResultTitle />
 

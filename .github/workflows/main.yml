@@ -10,19 +10,26 @@ jobs:
   ci:
     runs-on: ubuntu-latest
 
+    env:
+      PLAYWRIGHT_BROWSERS_PATH: 0
+
     steps:
       - uses: actions/checkout@v3
-      - uses: bahmutov/npm-install@v1
+      - uses: actions/cache@v3
+        with:
+          path: /home/runner/.local/share/pnpm/store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 7
+          run_install: true
 
       ## Test
-      - name: Run component tests
-        run: yarn test
-
-      # - name: Start Vite devserver
-      #   run: yarn start
-
-      # - name: Run tests
-      #   run: yarn test:ci
+      - name: Run tests
+        run: yarn test:ci
 
       - name: Upload artifacts on fail
         uses: actions/upload-artifact@v3
