@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "config:base",
+    "group:all",
+    "schedule:weekly"
+  ],
+  "packageRules": [
+    {
+      "updateTypes": [
+        "patch"
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": [
+        "npm"
+      ],
+      "stabilityDays": 2,
+      "prCreation": "not-pending"
+    }
+  ],
+  "timezone": "Europe/Helsinki",
+  "dependencyDashboard": true
+}
