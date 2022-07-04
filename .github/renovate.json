@@ -4,9 +4,6 @@
     "group:all",
     "schedule:weekly"
   ],
-  "baseBranches": [
-    "main"
-  ],
   "packageRules": [
     {
       "updateTypes": [
@@ -15,12 +12,13 @@
       "enabled": false
     },
     {
-      "matchPackagePatterns": [
-        "*"
+      "matchManagers": [
+        "npm"
       ],
-      "rangeStrategy": "replace"
+      "stabilityDays": 2,
+      "prCreation": "not-pending"
     }
   ],
   "timezone": "Europe/Helsinki",
-  "dependencyDashboard": false
+  "dependencyDashboard": true
 }
