@@ -11,19 +11,6 @@ const BUILD_DATE = import.meta.env.VITE_APP_BUILD_EPOCH
   : undefined
 const thisYear = new Date().getFullYear()
 </script>
-<style lang="postcss">
-label {
-  @apply sr-only;
-}
-
-input {
-  @apply border;
-}
-
-.tags {
-  @apply text-sm;
-}
-</style>
 
 <template>
   <header class="container mx-auto mt-6 prose-sm md:prose">
@@ -77,12 +64,12 @@ input {
         <a href="/index.json">full corpus</a>).
       </p>
 
-      <h3>Default</h3>
-      <JsonSearch :max-results="5" />
+      <h3 data-test-id="default">Default</h3>
+      <JsonSearch data-test-id="defaultsearch" :max-results="5" />
 
       <h3>Custom</h3>
-      <JsonSearch :show-tags="true" id="secondsearch" v-slot="{ results }">
-        <SearchInput />
+      <JsonSearch id="secondsearch" v-slot="{ results }" :show-tags="true">
+        <SearchInput data-test-id="customsearch" class="secondinput" />
         <SearchResults>
           <ResultTitle />
 
@@ -105,3 +92,17 @@ input {
     </p>
   </footer>
 </template>
+
+<style lang="postcss">
+label {
+  @apply sr-only;
+}
+
+input {
+  @apply border;
+}
+
+.tags {
+  @apply text-sm;
+}
+</style>

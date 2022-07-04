@@ -7,13 +7,14 @@
     "jsx": "preserve",
     "sourceMap": false,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "cypress"],
+    "types": ["vite/client"],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
-  "exclude": ["node_modules", "dist", "public", "tests"]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue", "tests/**/*.ts"],
+  "exclude": ["node_modules", "dist", "public"]
 }

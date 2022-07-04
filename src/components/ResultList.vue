@@ -6,7 +6,7 @@ import ResultListItem from './ResultListItem.vue'
 const results = inject<Ref<FuseResult<SearchResultItem>[]>>('results')
 </script>
 <template>
-  <ol>
+  <ol data-test-id="searchresultlist">
     <slot
       v-for="result in results"
       :key="result.refIndex"
@@ -14,7 +14,7 @@ const results = inject<Ref<FuseResult<SearchResultItem>[]>>('results')
         results,
       }"
     >
-      <ResultListItem :result="result.item" />
+      <ResultListItem :result="result.item" data-test-id="searchresultlistitem" />
     </slot>
   </ol>
 </template>

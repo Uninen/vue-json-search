@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import { inject, Ref } from 'vue'
+import { inject, Ref, useAttrs } from 'vue'
+const attrs = useAttrs()
 const props = defineProps<{
   label?: string
 }>()
 
 const label = props.label !== undefined ? props.label : 'Search'
 const searchTerm = inject<Ref<string>>('searchTerm')
-</script>
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
+const classAttrs = attrs['class'] ? attrs['class'] : 'jsonsearchinput'
 </script>
 <template>
   <slot
@@ -23,12 +20,13 @@ export default {
     </label>
     <input
       v-bind="$attrs"
+      v-model="searchTerm"
       name="jsonsearchinput"
-      class="jsonsearchinput"
+      :class="classAttrs"
       autocomplete="off"
       placeholder="Search"
       type="text"
-      v-model="searchTerm"
+      data-test-id="searchinput"
     />
   </slot>
 </template>

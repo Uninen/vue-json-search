@@ -12,6 +12,8 @@ const searchTerm = inject<string>('searchTerm')
       resultsTitle,
     }"
   >
-    <h3 v-if="searchTerm && searchTerm.length > 1">{{ resultsTitle }}</h3>
+    <h3 v-if="searchTerm && searchTerm.length > 1" data-test-id="searchresulttitle">{{
+      resultsTitle
+    }}</h3>
   </slot>
 </template>
