@@ -27,6 +27,9 @@ jobs:
           version: 7
           run_install: true
 
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
+
       ## Test
       - name: Run tests
         run: yarn test:ci
