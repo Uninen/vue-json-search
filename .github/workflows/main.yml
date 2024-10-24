@@ -14,8 +14,8 @@ jobs:
       PLAYWRIGHT_BROWSERS_PATH: 0
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/cache@v3
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
           path: /home/runner/.local/share/pnpm/store
           key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -35,7 +35,7 @@ jobs:
         run: yarn test:ci
 
       - name: Upload artifacts on fail
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: videos
